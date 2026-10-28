@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>তোমার জন্য একটা সারপ্রাইজ 🎁</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#2b0f2e;--bg2:#6a1b4d;--ink:#fff7f0;--accent:#ff4d79;--paper:#fff8ee;--paper-ink:#4a2330;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:'Hind Siliguri','Noto Sans Bengali',sans-serif;color:var(--ink);background:radial-gradient(circle at 50% 30%,var(--bg2),var(--bg1));overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+#stage{width:100%;max-width:420px;padding:20px;position:relative}
+h1{font-size:1.5rem;font-weight:600;margin:0 0 6px}
+.hint{opacity:.8;margin-bottom:28px;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.4}}
+.box{width:170px;height:170px;margin:30px auto;position:relative;cursor:pointer;animation:bob 2s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.base{position:absolute;bottom:0;width:170px;height:120px;background:var(--accent);border-radius:6px}
+.base:after,.lid:after{content:"";position:absolute;left:50%;width:24px;margin-left:-12px;top:0;bottom:0;background:#ffd36e}
+.lid{position:absolute;top:0;left:-8px;width:186px;height:56px;background:#ff6b8f;border-radius:6px;transform-origin:left bottom;transition:transform .9s cubic-bezier(.3,1.4,.5,1),opacity .6s .5s}
+.lid:before{content:"🎀";position:absolute;top:-26px;left:50%;margin-left:-18px;font-size:34px;z-index:2}
+.box.open{animation:none}
+.box.open .lid{transform:translate(-30px,-70px) rotate(-55deg);opacity:0}
+.box.open .base{animation:fadeout .8s 1s forwards}
+@keyframes fadeout{to{opacity:0;transform:translateY(30px)}}
+.letter{display:none;background:var(--paper);color:var(--paper-ink);border-radius:14px;padding:22px 20px;text-align:left;line-height:1.8;font-size:1.05rem;box-shadow:0 12px 40px rgba(0,0,0,.4);animation:rise .9s ease-out;max-height:60vh;overflow-y:auto}
+@keyframes rise{from{opacity:0;transform:translateY(40px) scale(.9)}}
+.q{display:none;margin-top:22px;animation:rise .8s}
+.q p{font-size:1.25rem;font-weight:600;margin:0 0 14px}
+button{font:inherit;font-weight:600;border:0;border-radius:999px;padding:12px 22px;margin:6px;cursor:pointer;background:var(--accent);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+button.alt{background:#ffd36e;color:#4a2330}
+button.no{background:#ddd;color:#555}
+#fin{display:none;font-size:1.5rem;font-weight:600;line-height:1.6;animation:rise .8s}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:5}
+.heart{position:fixed;bottom:-30px;font-size:22px;animation:float 5s linear forwards;pointer-events:none}
+@keyframes float{to{transform:translateY(-110vh);opacity:0}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="stage">
+  <div id="intro">
+    <h1>শাহরিন, তোমার জন্য চিঠি 💌</h1>
+    <div class="hint">বক্সটা ছুঁয়ে দেখো</div>
+    <div class="box" id="box"><div class="base"></div><div class="lid"></div></div>
+  </div>
+  <div class="letter" id="letter"><span id="txt"></span></div>
+  <div class="q" id="q">
+    <p>আরও ১০০ বছর আমার সাথে থাকবে? 💍</p>
+    <button id="yes">হ্যাঁ</button>
+    <button class="alt" id="yes2">অবশ্যই হ্যাঁ</button>
+    <button class="no" id="no">না</button>
+  </div>
+  <div id="fin"><span id="finTxt"></span></div>
+</div>
+<script>
+// ✏️ এখানে নিজের কথা বদলে নাও
+var LETTER = "আচ্ছা শাহরিন, এই দুনিয়ায় এত মানুষ থাকতে আমি কেন শুধু তোমার মায়ায় ডুবলাম? কেন তোমাকেই এত বেশি ভালোবেসে ফেললাম?\n\nকেন তোমার একটু অবহেলা আমার বুকের ভেতরটা তছনছ করে দেয়? আর একটুখানি আদর আমার ভেঙে যাওয়া পৃথিবীটা আবার জোড়া লাগিয়ে দেয়?\n\nকেন তোমার সাথে কথা না হলে দম বন্ধ হয়ে আসে? কেন পাগলের মতো উন্মাদ হয়ে প্রতিটা মুহূর্ত তোমার অপেক্ষায় কাটাই?\n\nপ্রিয়তমা, তুমি কি বলতে পারবা?\n\nআমার ভালোবাসায় কি কোনো কমতি আছে? যদি থাকে বলে দিয়ো। আমি তোমাকে পাবার জন্য যেই ভালোবাসা দরকার তার সবটাই দিব। তবুও তুমি হারিয়ে যেয়ো না আমার জীবন থেকে।\n\nতুমি যদি হারিয়ে যাও তাহলে আমি পৃথিবীর সবচেয়ে অসহায় মানুষ হয়ে যাব, পৃথিবীর সবচেয়ে দুর্ভাগা হয়ে যাব। পৃথিবীর সব অসুখ আমাকে ঘিরে ধরবে। তুমি যেয়ো না আমাকে ছেড়ে, হুমমমমম??? আমি তোমাকে খুব যত্ন নিবো।\n\nইতি,\nতোমার পাগল (সাদ্দাম) ❤️";
+var $=function(i){return document.getElementById(i)};
+var cv=$('c'),cx=cv.getContext('2d'),P=[];
+function size(){cv.width=innerWidth;cv.height=innerHeight}size();addEventListener('resize',size);
+function confetti(){
+  var cols=['#ff4d79','#ffd36e','#7ee0ff','#b69cff','#fff'];
+  for(var i=0;i<150;i++)P.push({x:innerWidth/2,y:innerHeight/2,vx:(Math.random()-.5)*14,vy:Math.random()*-14-2,s:Math.random()*7+4,c:cols[i%5],r:Math.random()*6});
+  if(P.length===150)loop();
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  P.forEach(function(p){p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=.2;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore()});
+  P=P.filter(function(p){return p.y<cv.height+20});
+  if(P.length)requestAnimationFrame(loop);else cx.clearRect(0,0,cv.width,cv.height);
+}
+function hearts(n){
+  for(var i=0;i<n;i++)setTimeout(function(){
+    var h=document.createElement('div');h.className='heart';h.textContent=['❤️','💖','💕'][Math.floor(Math.random()*3)];
+    h.style.left=Math.random()*100+'vw';document.body.appendChild(h);setTimeout(function(){h.remove()},5000);
+  },i*250);
+}
+var opened=false;
+$('box').addEventListener('click',function(){
+  if(opened)return;opened=true;
+  this.classList.add('open');confetti();hearts(14);
+  setTimeout(function(){$('intro').style.display='none';var l=$('letter');l.style.display='block';type(0)},1700);
+});
+function type(i){
+  var t=$('txt');t.textContent=LETTER.slice(0,i);t.style.whiteSpace='pre-wrap';
+  $('letter').scrollTop=1e5;
+  if(i<LETTER.length)setTimeout(function(){type(i+1)},35);
+  else setTimeout(function(){$('q').style.display='block'},700);
+}
+var LINES=["শাহরিন... 💖","তুমি হ্যাঁ বলেছ, আর আজ আমার পৃথিবীটা নতুন করে শুরু হলো। ✨","তোমার হাসি আমার সবচেয়ে প্রিয় সকাল। 🌅","তোমার পাশে থাকলে আমার সব ক্লান্তি মিলিয়ে যায়। 🤍","আমি কথা দিচ্ছি, সুখে দুঃখে সবসময় তোমার হাত ধরে থাকব। 🤝","আমিও তোমাকে সারাজীবন আগলে রাখব। তোমার যত্ন নেব, প্রিয়। 💞","আই লাভ ইউ, শাহরিন। ❤️"];
+function yes(){
+  $('q').style.display='none';$('letter').style.display='none';
+  var f=$('fin'),t=$('finTxt');f.style.display='block';t.style.transition='opacity 1s';t.style.opacity=0;
+  confetti();hearts(120);
+  var i=0;
+  function show(){
+    t.textContent=LINES[i];t.style.opacity=1;
+    if(i%2===0)confetti();
+    if(i<LINES.length-1){setTimeout(function(){t.style.opacity=0;setTimeout(function(){i++;show()},1000)},3500)}
+    else setTimeout(confetti,1500);
+  }
+  setTimeout(show,300);
+}
+$('yes').onclick=yes;$('yes2').onclick=yes;
+var no=$('no');
+function run(e){
+  e.preventDefault();
+  no.style.position='fixed';
+  no.style.left=Math.max(10,Math.random()*(innerWidth-100))+'px';
+  no.style.top=Math.max(10,Math.random()*(innerHeight-60))+'px';
+}
+no.addEventListener('pointerenter',run);no.addEventListener('pointerdown',run);no.addEventListener('touchstart',run,{passive:false});
+</script>
+</body>
+</html>
